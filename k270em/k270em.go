@@ -9,6 +9,12 @@ import (
     "os"
 )
 
+func die(err error) {
+    if err != nil {
+        panic(err)
+    }
+}
+
 func main() {
     flag.Parse()
     
@@ -17,13 +23,11 @@ func main() {
         os.Exit(2)
     }
     
-    f, err := os.Open(flag.Arg(0))
-    if err != nil {panic(err)}
+    f, err := os.Open(flag.Arg(0)); die(err)
     defer f.Close()
     
     reader := bufio.NewReader(f)
-    ix, err := ihex.ReadIHex(reader)
-    if err != nil {panic(err)}
+    ix, err := ihex.ReadIHex(reader); die(err)
     program := ix.ExtractDataToEnd(0)
     
     em := k270emlib.NewEmulator()
