@@ -6,9 +6,10 @@ import (
 
 type ANDGate struct {
     Sim *ksim3.Simulator
-    A   ksim3.Node
-    B   ksim3.Node
-    Q   ksim3.Node
+
+    A ksim3.Node
+    B ksim3.Node
+    Q ksim3.Node
 }
 
 func NewANDGate(a, b, q ksim3.Node) (c *ANDGate) {
